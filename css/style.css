@@ -62,7 +62,18 @@ body {
 body {
   letter-spacing: 0.03rem;
 }
+.image-holder {
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+}
 
+.image-holder img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+}
 h1,
 .h1,
 h2,
@@ -877,6 +888,19 @@ a {
 
 /*--- Image hover Effects
 -----------------------------------------------*/
+.image-zoom-effect .image-holder {
+  width: 100% !important;
+  height: 360px !important;
+  overflow: hidden !important;
+  position: relative;
+}
+
+.image-zoom-effect .image-holder img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block;
+}
 .image-zoom-effect {
   display: flex;
   flex-wrap: wrap;
@@ -1222,6 +1246,11 @@ a {
 @media screen and (min-width:1200px) {
   .product-thumbnail-slider {
     height: 790px;
+  }
+}
+@media (min-width: 768px) {
+  .image-holder {
+    height: 380px;
   }
 }
 /* 
