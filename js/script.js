@@ -1,27 +1,50 @@
-document.addEventListener("DOMContentLoaded", function () {
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  let searchInput = document.getElementById("searchInput");
-  let categoryFilter = document.getElementById("categoryFilter");
-  let items = document.querySelectorAll(".product-item");
+// Save + update UI
+function updateCart() {
+  const cartList = document.getElementById("cart-items");
+  cartList.innerHTML = "";
 
-  function filterProducts() {
-    let searchValue = searchInput.value.toLowerCase();
-    let categoryValue = categoryFilter.value;
+  let total = 0;
 
-    items.forEach(item => {
-      let text = item.textContent.toLowerCase();
-      let categoryMatch = categoryValue === "all" || item.classList.contains(categoryValue);
-      let searchMatch = text.includes(searchValue);
+  cart.forEach(item => {
+    total += parseFloat(item.price);
 
-      if (categoryMatch && searchMatch) {
-        item.style.display = "block";
-      } else {
-        item.style.display = "none";
-      }
+    cartList.innerHTML += `
+      <li class="list-group-item d-flex justify-content-between lh-sm">
+        <div>
+          <h6 class="my-0">${item.name}</h6>
+        </div>
+        <span class="text-body-secondary">$${item.price}</span>
+      </li>
+    `;
+  });
+
+  cartList.innerHTML += `
+    <li class="list-group-item d-flex justify-content-between">
+      <span>Total</span>
+      <strong>$${total}</strong>
+    </li>
+  `;
+
+  document.querySelector(".cart-count").innerText = `(${cart.length})`;
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Add to cart
+document.querySelectorAll(".add-to-cart").forEach(btn => {
+  btn.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    cart.push({
+      name: this.dataset.name,
+      price: this.dataset.price
     });
-  }
 
-  searchInput.addEventListener("input", filterProducts);
-  categoryFilter.addEventListener("change", filterProducts);
-
+    updateCart();
+  });
 });
+
+// init load
+updateCart();
