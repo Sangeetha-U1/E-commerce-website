@@ -48,3 +48,24 @@ document.querySelectorAll(".add-to-cart").forEach(btn => {
 
 // init load
 updateCart();
+const searchInput = document.getElementById("searchInput");
+const categoryFilter = document.getElementById("categoryFilter");
+const products = document.querySelectorAll(".product-card");
+
+function filterProducts() {
+  const search = searchInput.value.toLowerCase();
+  const category = categoryFilter.value;
+
+  products.forEach(product => {
+    const name = product.dataset.name.toLowerCase();
+    const cat = product.dataset.category;
+
+    const matchSearch = name.includes(search);
+    const matchCategory = category === "all" || cat === category;
+
+    product.style.display = (matchSearch && matchCategory) ? "block" : "none";
+  });
+}
+
+searchInput.addEventListener("input", filterProducts);
+categoryFilter.addEventListener("change", filterProducts);
