@@ -1,48 +1,25 @@
-// ================= LOGIN CHECK =================
-
-// Check login only for protected pages
-const currentPage = window.location.pathname.split("/").pop();
-
-if (currentPage !== "login.html") {
-
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
-
-  if (isLoggedIn !== "true") {
-    window.location.href = "login.html";
-  }
-}
-
-
-// ================= LOGIN FUNCTION =================
-
-function loginUser() {
-
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-
-  if (email === "" || password === "") {
-    alert("Please fill all fields");
-    return;
-  }
-  if (!email.includes("@")) {
-    alert("Please enter a valid email");
-    return;
-  }
-  localStorage.setItem("isLoggedIn", "true");
-
-  window.location.href = "index.html";
-}
-
-
-// ================= LOGOUT FUNCTION =================
-
-function logoutUser() {
-
-  localStorage.removeItem("isLoggedIn");
-
+if (localStorage.getItem("loggedIn") !== "true") {
   window.location.href = "login.html";
 }
-// =====================
+function login() {
+  const user = document.getElementById("username").value;
+  const pass = document.getElementById("password").value;
+
+  // simple demo check (you can replace with real backend later)
+  if (user && pass) {
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("user", user);
+    window.location.href = "index.html";
+  } else {
+    alert("Enter username & password");
+  }
+}
+
+function logout() {
+  localStorage.removeItem("loggedIn");
+  localStorage.removeItem("user");
+  window.location.href = "login.html";
+}// =====================
 // CART SYSTEM
 // =====================
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
