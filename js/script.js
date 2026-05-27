@@ -1,3 +1,44 @@
+// ================= LOGIN CHECK =================
+
+// Check login only for protected pages
+const currentPage = window.location.pathname.split("/").pop();
+
+if (currentPage !== "login.html") {
+
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  if (isLoggedIn !== "true") {
+    window.location.href = "login.html";
+  }
+}
+
+
+// ================= LOGIN FUNCTION =================
+
+function loginUser() {
+
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+
+  if (email === "" || password === "") {
+    alert("Please fill all fields");
+    return;
+  }
+
+  localStorage.setItem("isLoggedIn", "true");
+
+  window.location.href = "index.html";
+}
+
+
+// ================= LOGOUT FUNCTION =================
+
+function logoutUser() {
+
+  localStorage.removeItem("isLoggedIn");
+
+  window.location.href = "login.html";
+}
 // =====================
 // CART SYSTEM
 // =====================
