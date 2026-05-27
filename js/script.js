@@ -1,25 +1,3 @@
-if (localStorage.getItem("loggedIn") !== "true") {
-  window.location.href = "login.html";
-}
-function login() {
-  const user = document.getElementById("username").value;
-  const pass = document.getElementById("password").value;
-
-  // simple demo check (you can replace with real backend later)
-  if (user && pass) {
-    localStorage.setItem("loggedIn", "true");
-    localStorage.setItem("user", user);
-    window.location.href = "index.html";
-  } else {
-    alert("Enter username & password");
-  }
-}
-
-function logout() {
-  localStorage.removeItem("loggedIn");
-  localStorage.removeItem("user");
-  window.location.href = "login.html";
-}// =====================
 // CART SYSTEM
 // =====================
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
