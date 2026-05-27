@@ -24,7 +24,10 @@ function loginUser() {
     alert("Please fill all fields");
     return;
   }
-
+  if (!email.includes("@")) {
+    alert("Please enter a valid email");
+    return;
+  }
   localStorage.setItem("isLoggedIn", "true");
 
   window.location.href = "index.html";
